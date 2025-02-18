@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,28 @@ export default function Home() {
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const videoRef = useRef(null);
+  const [videoInViewRef, videoInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.5,
+  });
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (videoInView) {
+        videoRef.current.contentWindow.postMessage(
+          '{"event":"command","func":"playVideo","args":""}',
+          '*'
+        );
+      } else {
+        videoRef.current.contentWindow.postMessage(
+          '{"event":"command","func":"pauseVideo","args":""}',
+          '*'
+        );
+      }
+    }
+  }, [videoInView]);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -121,10 +143,14 @@ export default function Home() {
           <div className="aspect-video  bg-black/20 rounded-lg mb-12 mx-auto ">
             {/* Video placeholder */}
             <iframe
+              ref={node => {
+                videoRef.current = node;
+                videoInViewRef(node);
+              }}
               width="100%"
               height="100%"
               className="rounded-lg"
-              src={`https://www.youtube.com/embed/${orientationVideoId}?autoplay=1&mute=1&vq=small&loop=1&playlist=${orientationVideoId}`}
+              src={`https://www.youtube.com/embed/${orientationVideoId}?autoplay=1&mute=1&vq=small&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
