@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import Modal from '../components/Modal';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { globalContext } from '../context/globalContext';
+import NumberAnimation from '../components/NumberAnimatio';
 
 export default function Home() {
   document.title = 'CODE VISION | Home';
@@ -12,20 +14,39 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ title: '', description: '' });
 
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const gContext = useContext(globalContext);
+  const { scrollToSection, isMobile, visitCount } = gContext;
+
+  const inViewRefs = useRef({});
+  const [inViewStates, setInViewStates] = useState({});
+
+  const createInViewHook = (key, options) => {
+    if (isMobile) {
+      options = { ...options, threshold: 0.2 };
+    } else {
+      options = { ...options, threshold: 0.5 };
+    }
+    const [ref, inView] = useInView(options);
+    inViewRefs.current[key] = ref;
+    useEffect(() => {
+      setInViewStates(prevState => ({ ...prevState, [key]: inView }));
+    }, [inView]);
+  };
+
+  createInViewHook('section1', { triggerOnce: true });
+  createInViewHook('section2', { triggerOnce: true });
+  createInViewHook('section3', { triggerOnce: true });
+  createInViewHook('section4', { triggerOnce: true });
+  createInViewHook('section5', { triggerOnce: true });
+  createInViewHook('section6', { triggerOnce: true });
+  createInViewHook('event', { triggerOnce: true });
+  createInViewHook('video', { triggerOnce: false });
 
   const videoRef = useRef(null);
-  const [videoInViewRef, videoInView] = useInView({
-    triggerOnce: false,
-    threshold: 0.5,
-  });
 
   useEffect(() => {
     if (videoRef.current) {
-      if (videoInView) {
+      if (inViewStates.video) {
         videoRef.current.contentWindow.postMessage(
           '{"event":"command","func":"playVideo","args":""}',
           '*'
@@ -37,12 +58,44 @@ export default function Home() {
         );
       }
     }
-  }, [videoInView]);
+  }, [inViewStates.video]);
 
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
+  };
+
+  const subtitleVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: i => ({
+      opacity: 1,
+      x: 0,
+      transition: {
+        delay: 0.4 + i * 0.2,
+        duration: 0.6,
+        ease: 'easeOut',
+      },
+    }),
+  };
+
+  const backgroundVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 1.2 },
+    },
+  };
+
+  const orientationRef = useRef(null);
 
   const benefits = [
     {
@@ -126,6 +179,8 @@ export default function Home() {
   const aboutShort =
     'CODE VISION is a dynamic coding club dedicated to fostering technical excellence and leadership skills among students. We believe in learning by doing and creating opportunities for growth.';
 
+  const orientation =
+    'Welcome to CODE VISION! Our orientation program is designed to introduce you to the club, its members, and the various activitieswe offer. Join us to learn more about our mission, vision, and upcoming events.';
   const membersPhotos = [
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427424/IMG-20241111-WA0058_g35v0i.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731425180/IMG-20241111-WA0016_b8iobd.jpg',
@@ -133,36 +188,217 @@ export default function Home() {
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427420/IMG-20241111-WA0055_ozxx1g.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427454/IMG-20241111-WA0095_ygvzhd.jpg',
   ];
+
+  const nextEvent = {
+    name: 'C Workshop',
+    ref: 'cWorkshop',
+    details: {
+      targetAudience: 'First-year students',
+      objective: 'Introduce programming basics through hands-on coding in C.',
+      description:
+        'Join us for the C Workshop, a 4-5 day event designed for first-year students to introduce programming basics through hands-on coding in C. The workshop includes important C topics, hands-on exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
+      duration: '4-5 days',
+      agenda: [
+        'Include important C topics.',
+        'Intro to Programming & C: Basics of programming, C syntax, and structure.',
+        'Hands-on Exercises Part 1: Simple coding tasks with guidance.',
+        'Hands-on Exercises Part 2: Loops and conditional statements practice.',
+        'Q&A & Peer Collaboration: Address questions, troubleshoot, and collaborate.',
+        'Wrap-Up & Feedback: Recap, gather feedback, and share resources.',
+      ],
+      extras: [
+        'Support team for assistance.',
+        'Handouts and resource links.',
+        'Option for continued learning via a follow-up Q&A and networking.',
+      ],
+    },
+    poster:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1731569975/Snapinsta.app_432305420_1296910395044806_2298325038140788545_n_1080_hzve7t.jpg',
+  };
+
   return (
     <>
       <Modal open={modalOpen} setOpen={setModalOpen} data={modalData} />
       <div className="pt-5">
         {/* Hero Section */}
+        <section className="relative overflow-hidden h-screen flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center w-full h-full">
+            {/* Hero text content */}
+            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+              <motion.h1
+                className="font-ethnocentric text-4xl md:text-6xl lg:text-8xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+                initial="hidden"
+                animate="visible"
+                variants={titleVariants}
+              >
+                Code Vision
+              </motion.h1>
 
-        <section className="section-container ">
-          <div className="aspect-video  bg-black/20 rounded-lg mb-12 mx-auto ">
+              <div className="space-y-4">
+                <motion.p
+                  className="font-ethnocentric text-xl md:text-3xl lg:text-4xl font-bold"
+                  custom={0}
+                  initial="hidden"
+                  animate="visible"
+                  variants={subtitleVariants}
+                >
+                  <strong>An Abode for Coders.</strong>
+                </motion.p>
+
+                <motion.p
+                  className="text-lg md:text-xl text-gray-300"
+                  custom={1}
+                  initial="hidden"
+                  animate="visible"
+                  variants={subtitleVariants}
+                >
+                  To promote coders enriched with diverse technical skills.
+                </motion.p>
+
+                <motion.p
+                  className="text-xl md:text-2xl font-bold"
+                  custom={2}
+                  initial="hidden"
+                  animate="visible"
+                  variants={subtitleVariants}
+                >
+                  <strong>Join CV to enhance your CV.</strong>
+                </motion.p>
+              </div>
+
+              {/* CTA Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.4, duration: 0.6 }}
+                className="mt-12"
+              >
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 md:py-3 rounded-full font-medium transition-colors duration-300 shadow-lg hover:shadow-blue-500/30"
+                  onClick={() => scrollToSection(orientationRef)}
+                >
+                  Read More
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+        {/* Orientation Section */}
+        <section
+          className="section-container grid md:grid-cols-2 lg:grid-cols-5 gap-4"
+          ref={orientationRef}
+        >
+          {/* Video description */}
+          <motion.div
+            ref={inViewRefs.current.section1}
+            initial="hidden"
+            animate={inViewStates.section1 ? 'visible' : 'hidden'}
+            variants={cardVariants}
+            className="flex flex-col justify-center p-2 lg:col-span-2"
+          >
+            <h2 className="text-2xl font-bold mb-4">Orientation</h2>
+            <p className="mb-6">{orientation}</p>
+          </motion.div>
+
+          {/* Video player */}
+          <motion.div
+            ref={inViewRefs.current.section2}
+            initial="hidden"
+            animate={inViewStates.section2 ? 'visible' : 'hidden'}
+            variants={cardVariants}
+            className="aspect-video bg-black/20 rounded-lg  lg:col-span-3"
+          >
             {/* Video placeholder */}
             <iframe
               ref={node => {
                 videoRef.current = node;
-                videoInViewRef(node);
+                inViewRefs.current.video(node);
               }}
               width="100%"
               height="100%"
               className="rounded-lg"
-              src={`https://www.youtube.com/embed/${orientationVideoId}?autoplay=1&mute=1&vq=small&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
+              src={`https://www.youtube.com/embed/${orientationVideoId}?mute=1&vq=small&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              loading="lazy"
             ></iframe>
-            <p className="px-2">Orientation Video</p>
-          </div>
-
+          </motion.div>
+        </section>
+        {/* Next Event Section */}
+        <section className="section-container">
+          <h2 className="text-2xl font-bold mb-6 md:flex-row md:max-w-4xl md:mx-auto">
+            Next Event
+          </h2>
           <motion.div
-            ref={ref}
+            ref={inViewRefs.current.event}
             initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
+            animate={inViewStates.event ? 'visible' : 'hidden'}
+            variants={cardVariants}
+            className="flex flex-col items-center bg-white/5  rounded-lg shadow-sm md:flex-row md:max-w-4xl md:mx-auto"
+          >
+            <img
+              className="object-cover w-full rounded-t-lg h-max-96 md:h-auto md:w-96 md:rounded-none md:rounded-s-lg"
+              src={nextEvent.poster}
+              alt="Next Event Poster"
+            />
+            <div className="flex flex-col justify-between p-4 leading-normal">
+              <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                {nextEvent.name}
+              </h5>
+              <p className="mb-3 font-normal">{nextEvent.details.objective}</p>
+              <p className="mb-3 font-normal">
+                {nextEvent.details.description}
+              </p>
+              <div className="flex justify-start gap-4">
+                <button
+                  className="text-sm px-4 py-2 bg-white/5 rounded-lg cursor-pointer hover:bg-white/10 transition-colors"
+                  onClick={() => navigate(`/events/${nextEvent.ref}`)}
+                >
+                  Details
+                </button>
+                <button
+                  className="text-sm  px-4 py-2  rounded-lg cursor-pointer bg-blue-500 hover:bg-blue-600 transition-colors"
+                  onClick={() => navigate(`/events/${nextEvent.ref}`)}
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* Achievements Section in Numbers*/}
+        <section className="section-container">
+          <h2 className="text-2xl font-bold mb-6">Our Achievements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+            <div className="py-4 px-6 bg-white/5 rounded-lg">
+              <h3 className="text-4xl font-bold text-white ">
+                <NumberAnimation end={500} duration={5} />
+              </h3>
+              <p className="text-lg">Members</p>
+            </div>
+            <div className="py-4 px-6 bg-white/5 rounded-lg">
+              <h3 className="text-4xl font-bold text-white">
+                <NumberAnimation end={150} duration={5} />
+              </h3>
+              <p className="text-lg">Events</p>
+            </div>
+            <div className="py-4 px-6 bg-white/5 rounded-lg">
+              <h3 className="text-4xl font-bold text-white">
+                <NumberAnimation end={1000} duration={5} />
+              </h3>
+              <p className="text-lg">Projects</p>
+            </div>
+          </div>
+        </section>
+        {/* Benefits Section */}
+        <section className="section-container">
+          <motion.div
+            ref={inViewRefs.current.section3}
+            initial="hidden"
+            animate={inViewStates.section3 ? 'visible' : 'hidden'}
             variants={cardVariants}
             className="card"
           >
@@ -186,12 +422,17 @@ export default function Home() {
             </div>
           </motion.div>
         </section>
-
         {/* About Section */}
         <section className="section-container grid md:grid-cols-2 gap-8">
           <div className="bg-white/5 rounded-lg overflow-hidden">
             {/* Members photo placeholder */}
-            <div className="carousel-container">
+            <motion.div
+              ref={inViewRefs.current.section4}
+              initial="hidden"
+              animate={inViewStates.section4 ? 'visible' : 'hidden'}
+              variants={cardVariants}
+              className="carousel-container"
+            >
               <Carousel showThumbs={false} autoPlay infiniteLoop>
                 {membersPhotos.map((photo, index) => (
                   <div key={index}>
@@ -204,10 +445,16 @@ export default function Home() {
                   </div>
                 ))}
               </Carousel>
-            </div>
+            </motion.div>
           </div>
 
-          <div className="flex flex-col justify-center">
+          <motion.div
+            ref={inViewRefs.current.section5}
+            initial="hidden"
+            animate={inViewStates.section5 ? 'visible' : 'hidden'}
+            variants={cardVariants}
+            className="flex flex-col justify-center"
+          >
             <h2 className="text-2xl font-bold mb-4">About Us</h2>
             <p className="mb-6">{aboutShort}</p>
             <button
@@ -216,9 +463,8 @@ export default function Home() {
             >
               Read more
             </button>
-          </div>
+          </motion.div>
         </section>
-
         {/* Events Section */}
         <section className="section-container">
           <h2 className="text-2xl font-bold mb-8">Events</h2>
@@ -243,10 +489,15 @@ export default function Home() {
             ))}
           </div>
         </section>
-
         {/* Skills Section */}
         <section className="section-container">
-          <div className="card">
+          <motion.div
+            ref={inViewRefs.current.section6}
+            initial="hidden"
+            animate={inViewStates.section6 ? 'visible' : 'hidden'}
+            variants={cardVariants}
+            className="card"
+          >
             <h2 className="text-2xl font-bold mb-6">
               What you will learn here?
             </h2>
@@ -267,7 +518,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </>

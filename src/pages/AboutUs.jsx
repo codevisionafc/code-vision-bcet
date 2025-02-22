@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { motion } from 'framer-motion';
 import PageHeader from '../components/PageHeader';
 import { globalContext } from '../context/globalContext';
+import { useInView } from 'react-intersection-observer';
 
 const clubInfo = {
   story: `CODE VISION is a dynamic coding club dedicated to fostering technical excellence and leadership skills among students. We believe in learning by doing and creating opportunities for growth.
@@ -84,6 +85,20 @@ function AboutUs() {
   const toggleReadMore = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const inViewRefs = useRef({});
+  const [inViewStates, setInViewStates] = useState({});
+
+  const createInViewHook = (key, options) => {
+    const [ref, inView] = useInView(options);
+    inViewRefs.current[key] = ref;
+    useEffect(() => {
+      setInViewStates(prevState => ({ ...prevState, [key]: inView }));
+    }, [inView]);
+  };
+
+  createInViewHook('section1', { triggerOnce: true, threshold: 0.3 });
+  createInViewHook('section2', { triggerOnce: true, threshold: 0.3 });
   return (
     <div className="pt-20">
       <PageHeader
@@ -94,7 +109,8 @@ function AboutUs() {
       <div className="container mx-auto px-2 mt-10  ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: inViewStates.section1 ? 1 : 0, y: 0 }}
+          ref={inViewRefs.current.section1}
           className="card mb-12"
         >
           <h2 className="text-2xl font-bold mb-6">Leadership</h2>
@@ -117,7 +133,8 @@ function AboutUs() {
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: inViewStates.section2 ? 1 : 0, y: 0 }}
+          ref={inViewRefs.current.section2}
           className="card mb-12 text-base sm:text-lg"
         >
           <div className="space-y-3">

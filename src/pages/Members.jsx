@@ -56,7 +56,6 @@ export default function Members() {
       { name: 'Richa', branch: 'CSE' },
       { name: 'Richa Raj', branch: 'CSE' },
       { name: 'Rup Kumar Biswas', branch: 'CSE' },
-      { name: 'Sagar Kumar Mahto', branch: 'CSE' },
       { name: 'Sanjeevan Nag', branch: 'IT' },
       { name: 'Saurav Prasad', branch: 'IT' },
       { name: 'Sayan Mukherjee ', branch: 'CSE' },

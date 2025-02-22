@@ -174,7 +174,7 @@ export default function Footer() {
         <hr className="my-6 border-gray-200 sm:mx-auto" />
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm sm:text-center">
-            © 2024{' '}
+            © 2025{' '}
             <a href="/" className="hover:underline">
               Code Vision
             </a>

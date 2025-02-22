@@ -1,3 +1,4 @@
+@import url('https://fonts.cdnfonts.com/css/ethnocentric');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,10 +6,6 @@
 :root {
   font-family: 'Poppins', sans-serif;
 }
-
-/* body {
-  @apply bg-gradient-to-r from-primary-purple to-primary-blue min-h-screen text-white;
-} */
 
 body {
   color: white;
