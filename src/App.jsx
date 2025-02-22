@@ -4,7 +4,7 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,6 +16,10 @@ import Gallery from './pages/Gallery';
 import ContactUs from './pages/ContactUs';
 import './assets/customScrollbar.css';
 import AnimatedBackground from './components/AnimatedBackground';
+import { analytics, database } from './firebase/config';
+import { logEvent } from 'firebase/analytics';
+import { ref, get, set } from 'firebase/database';
+import { globalContext } from './context/globalContext';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -23,6 +27,7 @@ function ScrollToTop() {
   if (pathname.startsWith('/events/')) return null;
   useEffect(() => {
     window.scrollTo(0, 0);
+    logEvent(analytics, 'page_view', { page_path: pathname });
   }, [pathname]);
 
   return null;
@@ -30,6 +35,11 @@ function ScrollToTop() {
 // Hello World
 
 export default function App() {
+  const gContext = useContext(globalContext);
+  const { updateVisitCount, visitCount } = gContext;
+  useEffect(() => {
+    updateVisitCount();
+  }, []);
   return (
     <Router>
       <AnimatedBackground />

@@ -115,7 +115,7 @@ export default function Gallery() {
             animate={{ opacity: 1, y: 0 }}
             className="p-2 "
           >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-6 border-b-2">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 ">
               {event.title}
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[650px] overflow-y-auto p-2 mb-10">

@@ -16,7 +16,7 @@ function Modal({ open, setOpen, data }) {
           <h2 className="text-2xl font-bold mb-4">{data.title}</h2>
           <p>{data.description}</p>
           <button
-            className="mt-4 bg-blue-500 text-white px-4 py-1 rounded"
+            className="mt-4 bg-blue-500 text-white px-4 py-1 rounded-md"
             onClick={() => setOpen(false)}
           >
             Close

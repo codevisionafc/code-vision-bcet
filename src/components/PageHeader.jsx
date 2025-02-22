@@ -7,8 +7,8 @@ export default function PageHeader({ title, subtitle }) {
       animate={{ opacity: 1, y: 0 }}
       className="text-center "
     >
-      <h1 className="text-4xl font-bold mb-2">{title}</h1>
-      {subtitle && <p className="text-lg opacity-80">{subtitle}</p>}
+      <h1 className="text-3xl lg:text-4xl font-bold mb-2">{title}</h1>
+      {subtitle && <p className=" opacity-80">{subtitle}</p>}
     </motion.div>
   );
 }
