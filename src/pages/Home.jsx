@@ -9,13 +9,13 @@ import { globalContext } from '../context/globalContext';
 import NumberAnimation from '../components/NumberAnimatio';
 
 export default function Home() {
-  document.title = 'CODE VISION | Home';
+  document.title = 'Home | CODE VISION';
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ title: '', description: '' });
 
   const gContext = useContext(globalContext);
-  const { scrollToSection, isMobile, visitCount } = gContext;
+  const { scrollToSection, isMobile, info } = gContext;
 
   const inViewRefs = useRef({});
   const [inViewStates, setInViewStates] = useState({});
@@ -85,14 +85,6 @@ export default function Home() {
         ease: 'easeOut',
       },
     }),
-  };
-
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 1.2 },
-    },
   };
 
   const orientationRef = useRef(null);
@@ -274,7 +266,7 @@ export default function Home() {
                 className="mt-12"
               >
                 <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 md:py-3 rounded-full font-medium transition-colors duration-300 shadow-lg hover:shadow-blue-500/30"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 md:py-3 rounded-full font-semibold transition-colors duration-300 shadow-lg hover:shadow-blue-500/30"
                   onClick={() => scrollToSection(orientationRef)}
                 >
                   Read More
@@ -317,7 +309,7 @@ export default function Home() {
               width="100%"
               height="100%"
               className="rounded-lg"
-              src={`https://www.youtube.com/embed/${orientationVideoId}?mute=1&vq=small&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
+              src={`https://www.youtube.com/embed/${orientationVideoId}?autoplay=1&mute=1&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -375,21 +367,27 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white ">
-                <NumberAnimation end={500} duration={5} />
+                <NumberAnimation end={info.members} duration={10} />
               </h3>
               <p className="text-lg">Members</p>
             </div>
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white">
-                <NumberAnimation end={150} duration={5} />
+                <NumberAnimation end={info.events} duration={10} />
               </h3>
               <p className="text-lg">Events</p>
             </div>
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white">
-                <NumberAnimation end={1000} duration={5} />
+                <NumberAnimation end={info.participants} duration={10} />+
               </h3>
-              <p className="text-lg">Projects</p>
+              <p className="text-lg">Participants</p>
+            </div>
+            <div className="py-4 px-6 bg-white/5 rounded-lg col-span-full">
+              <h3 className="text-5xl font-bold text-white ">
+                <NumberAnimation end={info.visitCount} duration={10} />+
+              </h3>
+              <p className="text-xl">Site Vsist</p>
             </div>
           </div>
         </section>

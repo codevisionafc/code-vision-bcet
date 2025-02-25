@@ -3,7 +3,7 @@ import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
 
 export default function Gallery() {
-  document.title = 'CODE VISION | Gallery';
+  document.title = 'Gallery | CODE VSION';
   const [selectedImage, setSelectedImage] = useState(null);
 
   const events = [

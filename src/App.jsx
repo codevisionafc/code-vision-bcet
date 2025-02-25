@@ -14,11 +14,9 @@ import Members from './pages/Members';
 import Alumni from './pages/Alumni';
 import Gallery from './pages/Gallery';
 import ContactUs from './pages/ContactUs';
-import './assets/customScrollbar.css';
 import AnimatedBackground from './components/AnimatedBackground';
-import { analytics, database } from './firebase/config';
+import { analytics } from './firebase/config';
 import { logEvent } from 'firebase/analytics';
-import { ref, get, set } from 'firebase/database';
 import { globalContext } from './context/globalContext';
 
 // Scroll to top on route change
@@ -36,9 +34,9 @@ function ScrollToTop() {
 
 export default function App() {
   const gContext = useContext(globalContext);
-  const { updateVisitCount, visitCount } = gContext;
+  const { updateInfo } = gContext;
   useEffect(() => {
-    updateVisitCount();
+    updateInfo();
   }, []);
   return (
     <Router>

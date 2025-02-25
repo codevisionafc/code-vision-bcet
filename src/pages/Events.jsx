@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { globalContext } from '../context/globalContext';
 
 export default function Events() {
-  document.title = 'CODE VISION | Events';
+  document.title = 'Events | CODE VSION';
   const events = [
     {
       name: 'C Workshop',
