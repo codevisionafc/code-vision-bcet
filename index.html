@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+    <link rel="icon" type="image/x-icon" href="/logo.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo512.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -10,9 +14,53 @@
     />
     <meta name="theme-color" content="#101828" />
     <title>CODE VISION - An adobe for coders</title>
+    <meta
+      name="description"
+      content="CODE VISION - An adobe for coders. To promote coders enriched with diverse technical skills. Join CV to enhance your CV."
+    />
+    <meta
+      name="keywords"
+      content="code vision, BCET, Bengal College of Engineering and Technology, code vision BCET, BCET tech club, coding, programming, learning, sharing knowledge, tech community, software development, web development, mobile app development, website design, technology, computer science, engineering, software developer, software engineer, coder, programmer, tech events, coding workshops, tech seminars, coding competitions, tech talks, developer community, coding platform"
+    />
+    <meta name="author" content="CODE VISION" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta property="og:title" content="CODE VISION - An adobe for coders" />
+    <meta
+      property="og:description"
+      content="CODE VISION - An adobe for coders. To promote coders enriched with diverse technical skills. Join CV to enhance your CV."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://codevision-bcet.web.app" />
+    <meta property="og:image" content="/logo.png" />
+    <meta property="og:site_name" content="CODE VISION" />
+    <link rel="manifest" href="/manifest.json" />
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="Sitemap"
+      href="/sitemap.xml"
+    />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(
+            registration => {
+              console.log(
+                'ServiceWorker registration successful with scope: ',
+                registration.scope
+              );
+            },
+            err => {
+              console.log('ServiceWorker registration failed: ', err);
+            }
+          );
+        });
+      }
+    </script> -->
   </body>
 </html>

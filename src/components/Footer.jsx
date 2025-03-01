@@ -8,7 +8,6 @@ import {
   FaFacebook,
   FaYoutube,
 } from 'react-icons/fa';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import longLogo from '../assets/logo code vision.png';

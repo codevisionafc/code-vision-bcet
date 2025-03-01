@@ -1,8 +1,9 @@
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
+import '../assets/customScrollbar.css';
 
 export default function Members() {
-  document.title = 'CODE VISION | Members';
+  document.title = 'Members | CODE VSION';
   const members = {
     governors: [
       { name: 'Aditya Kumar ', branch: 'CSE' },

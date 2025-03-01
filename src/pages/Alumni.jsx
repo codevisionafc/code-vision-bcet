@@ -2,7 +2,7 @@ import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
 
 export default function Alumni() {
-  document.title = 'CODE VISION | Alumni';
+  document.title = 'Alumni | CODE VSION';
   const alumni = {
     2024: [
       'Abhishek Jha',

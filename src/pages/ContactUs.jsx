@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function ContactUs() {
-  document.title = 'CODE VISION | Contact Us';
+  document.title = 'Contact Us | CODE VSION';
   const contactInfo = [
     {
       icon: FaEnvelope,

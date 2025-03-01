@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import PageHeader from '../components/PageHeader';
 import { motion } from 'framer-motion';
+import '../assets/customScrollbar.css';
 
 export default function Gallery() {
-  document.title = 'CODE VISION | Gallery';
+  document.title = 'Gallery | CODE VSION';
   const [selectedImage, setSelectedImage] = useState(null);
 
   const events = [
@@ -118,7 +119,7 @@ export default function Gallery() {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 ">
               {event.title}
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[650px] overflow-y-auto p-2 mb-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[650px] overflow-y-auto custom-scrollbar p-2 mb-10">
               {event.images.map((image, imageIndex) => (
                 <motion.div
                   key={imageIndex}

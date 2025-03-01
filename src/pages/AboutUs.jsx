@@ -68,7 +68,7 @@ const leadership = [
 ];
 
 function AboutUs() {
-  document.title = 'CODE VISION | About Us';
+  document.title = 'About Us | CODE VSION';
   const gContext = useContext(globalContext);
   const { isMobile } = gContext;
 

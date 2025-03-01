@@ -9,13 +9,13 @@ import { globalContext } from '../context/globalContext';
 import NumberAnimation from '../components/NumberAnimatio';
 
 export default function Home() {
-  document.title = 'CODE VISION | Home';
+  document.title = 'CODE VISION - An adobe for coders';
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ title: '', description: '' });
 
   const gContext = useContext(globalContext);
-  const { scrollToSection, isMobile, visitCount } = gContext;
+  const { scrollToSection, isMobile, info } = gContext;
 
   const inViewRefs = useRef({});
   const [inViewStates, setInViewStates] = useState({});
@@ -85,14 +85,6 @@ export default function Home() {
         ease: 'easeOut',
       },
     }),
-  };
-
-  const backgroundVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 1.2 },
-    },
   };
 
   const orientationRef = useRef(null);
@@ -225,25 +217,27 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center w-full h-full">
             {/* Hero text content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-              <motion.h1
+              <motion.div
                 className="font-ethnocentric text-4xl md:text-6xl lg:text-8xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
                 initial="hidden"
                 animate="visible"
                 variants={titleVariants}
               >
-                Code Vision
-              </motion.h1>
+                <h1>Code Vision</h1>
+              </motion.div>
 
               <div className="space-y-4">
-                <motion.p
+                <motion.div
                   className="font-ethnocentric text-xl md:text-3xl lg:text-4xl font-bold"
                   custom={0}
                   initial="hidden"
                   animate="visible"
                   variants={subtitleVariants}
                 >
-                  <strong>An Abode for Coders.</strong>
-                </motion.p>
+                  <h2>
+                    <strong>An Abode for Coders.</strong>
+                  </h2>
+                </motion.div>
 
                 <motion.p
                   className="text-lg md:text-xl text-gray-300"
@@ -274,7 +268,7 @@ export default function Home() {
                 className="mt-12"
               >
                 <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 md:py-3 rounded-full font-medium transition-colors duration-300 shadow-lg hover:shadow-blue-500/30"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-2 md:py-3 rounded-full font-semibold transition-colors duration-300 shadow-lg hover:shadow-blue-500/30"
                   onClick={() => scrollToSection(orientationRef)}
                 >
                   Read More
@@ -285,7 +279,7 @@ export default function Home() {
         </section>
         {/* Orientation Section */}
         <section
-          className="section-container grid md:grid-cols-2 lg:grid-cols-5 gap-4"
+          className="section-container grid md:grid-cols-4 lg:grid-cols-7 gap-4"
           ref={orientationRef}
         >
           {/* Video description */}
@@ -294,7 +288,7 @@ export default function Home() {
             initial="hidden"
             animate={inViewStates.section1 ? 'visible' : 'hidden'}
             variants={cardVariants}
-            className="flex flex-col justify-center p-2 lg:col-span-2"
+            className="flex flex-col justify-center p-2 md:col-span-1 lg:col-span-2"
           >
             <h2 className="text-2xl font-bold mb-4">Orientation</h2>
             <p className="mb-6">{orientation}</p>
@@ -306,9 +300,8 @@ export default function Home() {
             initial="hidden"
             animate={inViewStates.section2 ? 'visible' : 'hidden'}
             variants={cardVariants}
-            className="aspect-video bg-black/20 rounded-lg  lg:col-span-3"
+            className="aspect-video bg-black/20 rounded-lg md:col-span-3 lg:col-span-5"
           >
-            {/* Video placeholder */}
             <iframe
               ref={node => {
                 videoRef.current = node;
@@ -317,7 +310,7 @@ export default function Home() {
               width="100%"
               height="100%"
               className="rounded-lg"
-              src={`https://www.youtube.com/embed/${orientationVideoId}?mute=1&vq=small&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
+              src={`https://www.youtube.com/embed/${orientationVideoId}?autoplay=1&mute=1&loop=1&playlist=${orientationVideoId}&enablejsapi=1`}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -375,21 +368,27 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white ">
-                <NumberAnimation end={500} duration={5} />
+                <NumberAnimation end={info.members} duration={10} />+
               </h3>
               <p className="text-lg">Members</p>
             </div>
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white">
-                <NumberAnimation end={150} duration={5} />
+                <NumberAnimation end={info.events} duration={10} />+
               </h3>
               <p className="text-lg">Events</p>
             </div>
             <div className="py-4 px-6 bg-white/5 rounded-lg">
               <h3 className="text-4xl font-bold text-white">
-                <NumberAnimation end={1000} duration={5} />
+                <NumberAnimation end={info.participants} duration={10} />+
               </h3>
-              <p className="text-lg">Projects</p>
+              <p className="text-lg">Participants</p>
+            </div>
+            <div className="py-4 px-6 bg-white/5 rounded-lg col-span-full">
+              <h3 className="text-5xl font-bold text-white ">
+                <NumberAnimation end={info.visitCount} duration={10} />+
+              </h3>
+              <p className="text-xl">Site Vsist</p>
             </div>
           </div>
         </section>

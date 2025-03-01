@@ -31,30 +31,36 @@ const GlobalProvider = ({ children }) => {
     sectionRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const [visitCount, setVisitCount] = useState(0);
+  const [info, setInfo] = useState({
+    members: 0,
+    events: 0,
+    participants: 0,
+    visitCount: 0,
+  });
   // Update visit count
-  const updateVisitCount = async () => {
+  const updateInfo = async () => {
     const db = database;
-    const visitCountRef = ref(db, 'visitCount');
+    const infoRef = ref(db, 'info');
     const host = window.location.hostname;
 
     try {
-      const snapshot = await get(visitCountRef);
+      const snapshot = await get(infoRef);
       if (snapshot.exists()) {
-        const currentCount = snapshot.val();
-        const newCount = currentCount + 1;
-        setVisitCount(newCount);
-        console.log(`Total site visits: ${newCount}`);
+        const data = snapshot.val();
+        const newCount = data.visitCount + 1;
+        setInfo({ ...data, visitCount: newCount });
+        // console.log('Total site visits:', newCount);
+        // console.log('Info fetched:', data, info);
         if (host !== 'localhost') {
-          await set(visitCountRef, newCount);
+          await set(infoRef, { ...data, visitCount: newCount });
         } else {
           console.log('Visit count not updated for localhost');
         }
       } else {
-        setVisitCount(1);
+        setInfo({ visitCount: 1 });
         console.log('Total site visits: 1');
         if (host !== 'localhost') {
-          await set(visitCountRef, 1);
+          await set(infoRef, { ...info, visitCount: 1 });
         } else {
           console.log('Visit count not updated for localhost');
         }
@@ -66,7 +72,7 @@ const GlobalProvider = ({ children }) => {
 
   return (
     <globalContext.Provider
-      value={{ isMobile, scrollToSection, updateVisitCount, visitCount }}
+      value={{ isMobile, scrollToSection, updateInfo, info }}
     >
       {children}
     </globalContext.Provider>
