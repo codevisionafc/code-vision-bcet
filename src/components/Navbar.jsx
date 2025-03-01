@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 // import logo from '../assets/logo.svg';
 import logo from '../assets/logo.png';
@@ -38,10 +38,17 @@ export default function Navbar() {
       transition={{ duration: 0.3 }}
       className="fixed w-full bg-white/10 backdrop-blur-lg z-50"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        aria-label="Main Navigation"
+      >
         <div className="flex justify-between items-center h-16">
           {/* Logo and Title Section */}
-          <Link className="flex items-center flex-shrink-0" to="/">
+          <NavLink
+            className="flex items-center flex-shrink-0"
+            to="/"
+            title="Home"
+          >
             <img
               src={logo}
               alt="CODE VISION Logo"
@@ -52,20 +59,12 @@ export default function Navbar() {
               alt="CODE VISION Logo"
               className="h-8 w-auto px-1.5"
             />
-            {/* <div className="ml-3">
-              <h1 className="text-lg sm:text-xl font-bold whitespace-nowrap">
-                CODE VISION
-              </h1>
-              <p className="text-xs sm:text-sm opacity-80 whitespace-nowrap">
-                An adobe for coders
-              </p>
-            </div> */}
-          </Link>
+          </NavLink>
 
           {/* Desktop and Tablet Navigation */}
           <div className="hidden lg:flex space-x-6 xl:space-x-8">
             {navLinks.map(link => (
-              <Link
+              <NavLink
                 key={link}
                 to={
                   link === 'Home'
@@ -73,9 +72,10 @@ export default function Navbar() {
                     : `/${link.toLowerCase().replace(' ', '-')}`
                 }
                 className="nav-link text-sm xl:text-base whitespace-nowrap"
+                title={link}
               >
                 {link}
-              </Link>
+              </NavLink>
             ))}
           </div>
 
@@ -117,7 +117,7 @@ export default function Navbar() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white/5 rounded-lg mb-2">
                 {navLinks.map(link => (
-                  <Link
+                  <NavLink
                     key={link}
                     to={
                       link === 'Home'
@@ -126,15 +126,16 @@ export default function Navbar() {
                     }
                     className="block px-3 py-2 rounded-md text-base hover:bg-white/10 transition-colors"
                     onClick={() => setIsOpen(false)}
+                    title={link}
                   >
                     {link}
-                  </Link>
+                  </NavLink>
                 ))}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </nav>
     </motion.nav>
   );
 }
