@@ -16,11 +16,11 @@ Join us at Code Vision as we explore the limitless possibilities of coding toget
   promote: 'Join CV to enhance your CV.',
   foundedIn: '2016',
   founders: [
-    'Hari Om bhaiya',
-    'Shuvajit Dey bhaiya',
-    'Adarsh Choudhary bhaiya',
-    'Rakesh Singh bhaiya',
-    'Anurag bhaiya',
+    'Hari Om',
+    'Shuvajit Dey',
+    'Adarsh Choudhary',
+    'Rakesh Singh',
+    'Anurag',
   ],
   roles: {
     finalYear: 'Governors',
@@ -29,10 +29,38 @@ Join us at Code Vision as we explore the limitless possibilities of coding toget
   },
   events: [
     'C-Workshop (for 1st Year)',
-    'Annual Event (Console)',
+    'Console (Annual Event)',
     'CodeJam (Hackathon)',
   ],
 };
+
+const founders = [
+  {
+    name: 'Hari Om',
+    photo:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1741938819/hari_om_w8mvmh.jpg',
+  },
+  {
+    name: 'Shuvajit Dey',
+    photo:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1741938817/shuvajit_dey_u1opcr.jpg',
+  },
+  {
+    name: 'Aadarsh Choudhary',
+    photo:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1741938819/adarsh_choudhury_couast.jpg',
+  },
+  {
+    name: 'Rakesh Singh',
+    photo:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1741938818/rakesh_singh_q1xjf5.jpg',
+  },
+  {
+    name: 'Anurag Anand',
+    photo:
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1741938819/anurag_anand_faxeye.jpg',
+  },
+];
 
 const leadership = [
   {
@@ -106,7 +134,7 @@ function AboutUs() {
         subtitle="Learn about our journey and mission"
       />
 
-      <div className="container mx-auto px-2 mt-10  ">
+      <div className="container mx-auto px-2 mt-10  max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inViewStates.section1 ? 1 : 0, y: 0 }}
@@ -131,49 +159,80 @@ function AboutUs() {
             ))}
           </div>
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: inViewStates.section2 ? 1 : 0, y: 0 }}
           ref={inViewRefs.current.section2}
           className="card mb-12 text-base sm:text-lg"
         >
-          <div className="space-y-3">
-            <h2 className="text-2xl font-bold pb-2 border-b-2 border-gray-300">
+          <div className="space-y-10">
+            <h2 className="text-3xl font-bold pb-2 border-b-2 border-gray-300">
               Club Details
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <p>
-                  <strong>Founded in:</strong> {clubInfo.foundedIn}
-                </p>
-                <div>
-                  <strong>Founded by:</strong>
-                  <ul className="list-disc list-inside ml-4">
-                    {clubInfo.founders.map((founder, index) => (
-                      <li key={index}>{founder}</li>
-                    ))}
-                  </ul>
+
+            {/* Teacher founder */}
+            <h2 className="text-xl font-bold mb-6">Teacher Founder:</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-6">
+              <div className="flex items-center justify-center h-full">
+                <div className="size-36 md:size-52 mx-auto rounded-full bg-white/10 mb-4">
+                  <img
+                    src="https://res.cloudinary.com/debt9pcvr/image/upload/v1741946619/Prasanjit_Maji_jsem8c.jpg"
+                    alt="Teacher Founder"
+                    loading="lazy"
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 </div>
               </div>
-              <div className="space-y-2">
-                <div>
-                  <strong>Roles:</strong>
-                  <ul className="list-disc list-inside ml-4">
-                    <li>Final Year: {clubInfo.roles.finalYear}</li>
-                    <li>3rd Year: {clubInfo.roles.thirdYear}</li>
-                    <li>2nd Year: {clubInfo.roles.secondYear}</li>
-                  </ul>
+              <h3 className="font-semibold text-xl md:text-3xl flex items-center justify-center md:justify-start">
+                Prasanjit Maji
+              </h3>
+            </div>
+
+            {/* Student founders */}
+            <h2 className="text-xl font-bold mb-6">Student Founders:</h2>
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-6">
+              {founders.map((founder, index) => (
+                <div key={index} className="text-center">
+                  <div className="size-24 md:size-40 mx-auto rounded-full bg-white/10 mb-4">
+                    <img
+                      src={founder.photo}
+                      alt={founder.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                  <h3 className="font-semibold">{founder.name}</h3>
                 </div>
-                <div>
-                  <strong>Club Events:</strong>
-                  <ul className="list-disc list-inside ml-4">
-                    {clubInfo.events.map((event, index) => (
-                      <li key={index}>{event}</li>
-                    ))}
-                  </ul>
-                </div>
+              ))}
+            </div>
+
+            {/* Founded In */}
+            <p className="text-3xl my-24">
+              <strong>Founded in:</strong> {clubInfo.foundedIn}
+            </p>
+
+            {/* Roles and Events */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <strong>Roles:</strong>
+                <ul className="list-disc list-inside ml-4">
+                  <li>Final Year: {clubInfo.roles.finalYear}</li>
+                  <li>3rd Year: {clubInfo.roles.thirdYear}</li>
+                  <li>2nd Year: {clubInfo.roles.secondYear}</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Club Events:</strong>
+                <ul className="list-disc list-inside ml-4">
+                  {clubInfo.events.map((event, index) => (
+                    <li key={index}>{event}</li>
+                  ))}
+                </ul>
               </div>
             </div>
+
+            {/* Our Story */}
             <h2 className="text-2xl font-bold pb-2 border-b-2 border-gray-300">
               Our Story
             </h2>

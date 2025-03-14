@@ -160,7 +160,7 @@ export default function Alumni() {
     <div className="pt-20">
       <PageHeader title="Alumni" subtitle="Our distinguished former members" />
 
-      <div className="container mx-auto px-2 mt-10">
+      <div className="container mx-auto px-2 mt-10 max-w-7xl">
         {Object.entries(alumni)
           .reverse()
           .map(([year, names]) => (

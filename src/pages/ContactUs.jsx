@@ -30,7 +30,7 @@ export default function ContactUs() {
     <div className="pt-20">
       <PageHeader title="Contact Us" subtitle="Get in touch with us" />
 
-      <div className="container mx-auto px-2 mt-10">
+      <div className="container mx-auto px-2 mt-10 max-w-7xl">
         <div className="grid md:grid-cols-2 gap-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}

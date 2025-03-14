@@ -41,7 +41,7 @@ export default function Events() {
         skillFocus: 'Coding, Reasoning, Logical Thinking',
         prizes: 'Trophies and Badges',
         teamSize: '4 Members',
-        duration: '2 Days',
+        duration: '3-4 Days',
         agenda: [
           'Registration: Team formation and orientation.',
           'Coding Phase: Teams work on solutions with mentorship.',
@@ -91,7 +91,7 @@ export default function Events() {
           'Console offers a rich experience, blending competition with learning and community-building across multiple skill domains.',
         eligibility: 'All Undergraduate Students',
         theme: 'Unleashing Skills, Celebrating Diversity',
-        duration: '2 Days',
+        duration: '4-5 Days',
         judgingCriteria:
           'Skill-specific performance, creativity, and engagement.',
         prizes: 'Trophies, badges, and participation certificates.',
@@ -149,7 +149,7 @@ export default function Events() {
         subtitle="Explore our technical events and activities"
       />
 
-      <div className="container mx-auto px-2 mt-10">
+      <div className="container mx-auto px-2 mt-10 max-w-7xl">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {events.map((event, index) => (
             <motion.div
