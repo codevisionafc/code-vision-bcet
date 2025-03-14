@@ -126,7 +126,7 @@ export default function Members() {
   return (
     <div className="pt-20">
       <PageHeader title="Members" subtitle="Meet our team" />
-      <div className="container mx-auto px-2 mt-10">
+      <div className="container mx-auto px-2 mt-10 max-w-7xl">
         <MemberTable title="Governors (4th Year)" members={members.governors} />
         <MemberTable
           title="Organizers (3rd Year)"

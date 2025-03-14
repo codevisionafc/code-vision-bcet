@@ -162,7 +162,7 @@ export default function Home() {
       title: 'Console',
       ref: 'console',
       description:
-        'A 2-day event celebrating diverse skills with competitions in logic, coding, design, creativity, and more for undergraduates, featuring trophies, badges, and certificates.',
+        'Code Vision annual event celebrating diverse skills with competitions in logic, coding, design, creativity, and more for undergraduates, featuring trophies, badges, and certificates.',
     },
   ];
 
@@ -177,7 +177,7 @@ export default function Home() {
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427424/IMG-20241111-WA0058_g35v0i.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731425180/IMG-20241111-WA0016_b8iobd.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427421/IMG-20241111-WA0057_bfqxcl.jpg',
-    'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427420/IMG-20241111-WA0055_ozxx1g.jpg',
+    'https://res.cloudinary.com/debt9pcvr/image/upload/v1741936932/WhatsApp_Image_2025-03-14_at_02.12.08_ef762af3_bmurl1.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427454/IMG-20241111-WA0095_ygvzhd.jpg',
   ];
 

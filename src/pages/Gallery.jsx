@@ -108,7 +108,7 @@ export default function Gallery() {
     <div className="pt-20">
       <PageHeader title="Gallery" subtitle="Memories from our events" />
 
-      <div className="container mx-auto px-2">
+      <div className="container mx-auto px-2 max-w-7xl">
         {events.map((event, eventIndex) => (
           <motion.div
             key={eventIndex}
