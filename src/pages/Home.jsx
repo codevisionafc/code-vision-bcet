@@ -388,7 +388,7 @@ export default function Home() {
               <h3 className="text-5xl font-bold text-white ">
                 <NumberAnimation end={info.visitCount} duration={10} />+
               </h3>
-              <p className="text-xl">Site Vsist</p>
+              <p className="text-xl">Site Visit</p>
             </div>
           </div>
         </section>
