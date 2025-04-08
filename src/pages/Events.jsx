@@ -8,6 +8,40 @@ export default function Events() {
   document.title = 'Events | CODE VSION';
   const events = [
     {
+      name: 'Python Bootcamp',
+      ref: 'pythonBootcamp',
+      details: {
+        targetAudience: 'First and second year students',
+        objective:
+          'Introduce Python programming basics through hands-on coding.',
+        description:
+          'Join us for the Python Bootcamp, a 5-day event designed for first and second-year students to introduce Python programming basics through hands-on coding. The bootcamp includes key Python topics, practical exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
+        duration: '3 days',
+        date: '12 - 14 August 2025',
+        agenda: [
+          'Introduction: Overview of Python and its applications.',
+          'Basic Data Types: Numbers, strings, and variables.',
+          'Functions: Defining and using functions in Python.',
+          'Control Flow: If-else statements, loops, and logical operators.',
+          'Data Structures: Lists, tuples, dictionaries, and sets.',
+          'OOPS: Object-Oriented Programming concepts in Python.',
+          'Project: Build a mini Python application to apply the concepts learned.',
+          'Hands-on Exercises: Practical coding tasks for each topic.',
+          'Q&A & Peer Collaboration: Address questions, troubleshoot, and collaborate.',
+          'Wrap-Up & Feedback: Recap, gather feedback, and share resources.',
+        ],
+        extras: [
+          'Support team for assistance.',
+          'Handouts and resource links.',
+          'Option for continued learning via a follow-up Q&A and networking.',
+        ],
+      },
+      registrationLink:
+        'https://docs.google.com/forms/d/e/1FAIpQLSc4BDru-xszxHeXYUPrHUgoFd8kAOhNRTo4g46D04yLR_BTew/viewform',
+      poster:
+        'https://res.cloudinary.com/debt9pcvr/image/upload/v1744142016/WhatsApp_Image_2025-04-09_at_01.05.32_8b9035dc_d9nk43.jpg',
+    },
+    {
       name: 'C Workshop',
       ref: 'cWorkshop',
       details: {
@@ -120,12 +154,14 @@ export default function Events() {
     },
   ];
 
+  const pythonBootcamp = useRef(null);
   const cWorkshop = useRef(null);
   const codeJam = useRef(null);
   const recruitment = useRef(null);
   const console = useRef(null);
 
   const refStore = {
+    pythonBootcamp,
     cWorkshop,
     codeJam,
     recruitment,
@@ -166,12 +202,12 @@ export default function Events() {
         </div>
 
         <div className="space-y-12">
-          {/* C Workshop */}
+          {/* Python Bootcamp */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="card mb-6"
-            ref={refStore.cWorkshop}
+            ref={refStore.pythonBootcamp}
           >
             <h2 className="text-2xl font-bold mb-6">{events[0].name}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -221,15 +257,14 @@ export default function Events() {
               </div>
             </div>
           </motion.div>
-
-          {/* CodeJam */}
+          {/* C Workshop */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="card mb-6"
-            ref={refStore.codeJam}
+            ref={refStore.cWorkshop}
           >
-            <h2 className="text-2xl font-bold mb-6">{events[1].name}</h2>
+            <h2 className="text-2xl font-bold mb-6">{events[0].name}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="aspect-auto rounded-lg flex items-start justify-center order-1 md:order-2">
                 <img
@@ -239,7 +274,7 @@ export default function Events() {
                 />
               </div>
               <div className="space-y-4 text-sm sm:text-base order-2 md:order-1">
-                <p className="text-lg">{events[1].details.overview}</p>
+                <p className="text-lg">{events[1].details.objective}</p>
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -247,16 +282,6 @@ export default function Events() {
                       <p className="opacity-80">
                         {events[1].details.targetAudience}
                       </p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Skill Focus</h3>
-                      <p className="opacity-80">
-                        {events[1].details.skillFocus}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Prizes</h3>
-                      <p className="opacity-80">{events[1].details.prizes}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Duration</h3>
@@ -274,22 +299,28 @@ export default function Events() {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Award</h3>
-                    <p className="opacity-80">{events[1].details.award}</p>
+                    <h3 className="font-semibold mb-2">Extras</h3>
+                    <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
+                      {events[1].details.extras.map((subEvent, idx) => (
+                        <li key={idx} className="whitespace-normal break-words">
+                          {subEvent}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Recruitmemt */}
+          {/* CodeJam */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="card mb-6"
-            ref={refStore.recruitment}
+            ref={refStore.codeJam}
           >
-            <h2 className="text-2xl font-bold mb-6">{events[2].name}</h2>
+            <h2 className="text-2xl font-bold mb-6">{events[1].name}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="aspect-auto rounded-lg flex items-start justify-center order-1 md:order-2">
                 <img
@@ -303,19 +334,79 @@ export default function Events() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h3 className="font-semibold mb-2">Eligibility</h3>
+                      <h3 className="font-semibold mb-2">Target Audience</h3>
                       <p className="opacity-80">
-                        {events[2].details.eligibility}
+                        {events[2].details.targetAudience}
                       </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Skill Focus</h3>
+                      <p className="opacity-80">
+                        {events[2].details.skillFocus}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Prizes</h3>
+                      <p className="opacity-80">{events[2].details.prizes}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Duration</h3>
                       <p className="opacity-80">{events[2].details.duration}</p>
                     </div>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Agenda</h3>
+                    <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
+                      {events[2].details.agenda.map((subEvent, idx) => (
+                        <li key={idx} className="whitespace-normal break-words">
+                          {subEvent}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Award</h3>
+                    <p className="opacity-80">{events[2].details.award}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Recruitmemt */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="card mb-6"
+            ref={refStore.recruitment}
+          >
+            <h2 className="text-2xl font-bold mb-6">{events[3].name}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="aspect-auto rounded-lg flex items-start justify-center order-1 md:order-2">
+                <img
+                  className="rounded-lg shadow-lg max-h-[500px]"
+                  src={events[3].poster}
+                  alt={`${events[3].name} Poster`}
+                />
+              </div>
+              <div className="space-y-4 text-sm sm:text-base order-2 md:order-1">
+                <p className="text-lg">{events[3].details.overview}</p>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="font-semibold mb-2">Eligibility</h3>
+                      <p className="opacity-80">
+                        {events[3].details.eligibility}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Duration</h3>
+                      <p className="opacity-80">{events[3].details.duration}</p>
+                    </div>
                     <div>
                       <h3 className="font-semibold mb-2">Preperation Tips</h3>
                       <p className="opacity-80">
-                        {events[2].details.preperationTips}
+                        {events[3].details.preperationTips}
                       </p>
                     </div>
                   </div>
@@ -325,7 +416,7 @@ export default function Events() {
                   <div>
                     <h3 className="font-semibold mb-2">Round 1</h3>
                     <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
-                      {events[2].details.round1.map((subEvent, idx) => (
+                      {events[3].details.round1.map((subEvent, idx) => (
                         <li key={idx} className="whitespace-normal break-words">
                           {subEvent}
                         </li>
@@ -335,7 +426,7 @@ export default function Events() {
                   <div>
                     <h3 className="font-semibold mb-2">Round 2</h3>
                     <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
-                      {events[2].details.round2.map((subEvent, idx) => (
+                      {events[3].details.round2.map((subEvent, idx) => (
                         <li key={idx} className="whitespace-normal break-words">
                           {subEvent}
                         </li>
@@ -347,7 +438,7 @@ export default function Events() {
                       Key Qualities CODE VISION Values
                     </h3>
                     <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
-                      {events[2].details.keyQualities.map((subEvent, idx) => (
+                      {events[3].details.keyQualities.map((subEvent, idx) => (
                         <li key={idx} className="whitespace-normal break-words">
                           {subEvent}
                         </li>
@@ -366,37 +457,37 @@ export default function Events() {
             className="card mb-6"
             ref={refStore.console}
           >
-            <h2 className="text-2xl font-bold mb-6">{events[3].name}</h2>
+            <h2 className="text-2xl font-bold mb-6">{events[4].name}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="aspect-auto rounded-lg flex items-start justify-center order-1 md:order-2">
                 <img
                   className="rounded-lg shadow-lg max-h-[500px]"
-                  src={events[3].poster}
-                  alt={`${events[3].name} Poster`}
+                  src={events[4].poster}
+                  alt={`${events[4].name} Poster`}
                 />
               </div>
               <div className="space-y-4 text-sm sm:text-base order-2 md:order-1">
-                <p className="text-lg">{events[3].details.objective}</p>
+                <p className="text-lg">{events[4].details.objective}</p>
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="font-semibold mb-2">Eligibility</h3>
                       <p className="opacity-80">
-                        {events[3].details.eligibility}
+                        {events[4].details.eligibility}
                       </p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Duration</h3>
-                      <p className="opacity-80">{events[3].details.duration}</p>
+                      <p className="opacity-80">{events[4].details.duration}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Theme</h3>
-                      <p className="opacity-80">{events[3].details.theme}</p>
+                      <p className="opacity-80">{events[4].details.theme}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Judging Criteria</h3>
                       <p className="opacity-80">
-                        {events[3].details.judgingCriteria}
+                        {events[4].details.judgingCriteria}
                       </p>
                     </div>
                   </div>
@@ -405,7 +496,7 @@ export default function Events() {
                       Key Sub Events
                     </h3>
                     <ul className="list-disc list-outside ps-4 opacity-80 space-y-2">
-                      {events[3].details.subEvents.map((subEvent, idx) => (
+                      {events[4].details.subEvents.map((subEvent, idx) => (
                         <li key={idx} className="whitespace-normal break-words">
                           {subEvent}
                         </li>
@@ -414,7 +505,7 @@ export default function Events() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-2">Prizes</h3>
-                    <p className="opacity-80">{events[3].details.prizes}</p>
+                    <p className="opacity-80">{events[4].details.prizes}</p>
                   </div>
                 </div>
               </div>
