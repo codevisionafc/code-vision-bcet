@@ -89,7 +89,7 @@ const leadership = [
   },
   {
     position: 'Joint SCO',
-    name: 'Sukriti Priya',
+    name: 'Sukriti Priya (IT)',
     photo:
       'https://res.cloudinary.com/debt9pcvr/image/upload/v1731506697/WhatsApp_Image_2024-11-13_at_15.45.59_3e78d4f5_voqtso.jpg',
   },
