@@ -264,7 +264,7 @@ export default function Events() {
             className="card mb-6"
             ref={refStore.cWorkshop}
           >
-            <h2 className="text-2xl font-bold mb-6">{events[0].name}</h2>
+            <h2 className="text-2xl font-bold mb-6">{events[1].name}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="aspect-auto rounded-lg flex items-start justify-center order-1 md:order-2">
                 <img
