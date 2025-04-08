@@ -7,6 +7,7 @@ import Modal from '../components/Modal';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { globalContext } from '../context/globalContext';
 import NumberAnimation from '../components/NumberAnimatio';
+import { title } from 'framer-motion/client';
 
 export default function Home() {
   document.title = 'CODE VISION - An adobe for coders';
@@ -20,16 +21,22 @@ export default function Home() {
   const inViewRefs = useRef({});
   const [inViewStates, setInViewStates] = useState({});
 
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func(...args), delay);
+    };
+  };
+
   const createInViewHook = (key, options) => {
-    if (isMobile) {
-      options = { ...options, threshold: 0.2 };
-    } else {
-      options = { ...options, threshold: 0.5 };
-    }
     const [ref, inView] = useInView(options);
     inViewRefs.current[key] = ref;
     useEffect(() => {
-      setInViewStates(prevState => ({ ...prevState, [key]: inView }));
+      const debouncedUpdate = debounce(() => {
+        setInViewStates(prevState => ({ ...prevState, [key]: inView }));
+      }, 100);
+      debouncedUpdate();
     }, [inView]);
   };
 
@@ -141,6 +148,12 @@ export default function Home() {
 
   const events = [
     {
+      title: 'Python Bootcamp',
+      ref: 'pythonBootcamp',
+      description:
+        'A 3-day event introducing Python programming basics through hands-on coding, covering key topics, practical exercises, and peer collaboration.',
+    },
+    {
       title: 'C Workshop',
       ref: 'cWorkshop',
       description:
@@ -182,19 +195,24 @@ export default function Home() {
   ];
 
   const nextEvent = {
-    name: 'C Workshop',
-    ref: 'cWorkshop',
+    name: 'PYTHON BOOTCAMP 2025',
+    ref: 'pythonBootcamp',
     details: {
-      targetAudience: 'First-year students',
-      objective: 'Introduce programming basics through hands-on coding in C.',
+      targetAudience: 'First and second year students',
+      objective: 'Introduce Python programming basics through hands-on coding.',
       description:
-        'Join us for the C Workshop, a 4-5 day event designed for first-year students to introduce programming basics through hands-on coding in C. The workshop includes important C topics, hands-on exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
-      duration: '4-5 days',
+        'Join us for the Python Bootcamp, a 5-day event designed for first and second-year students to introduce Python programming basics through hands-on coding. The bootcamp includes key Python topics, practical exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
+      duration: '5 days',
+      date: '12 - 14 August 2025',
       agenda: [
-        'Include important C topics.',
-        'Intro to Programming & C: Basics of programming, C syntax, and structure.',
-        'Hands-on Exercises Part 1: Simple coding tasks with guidance.',
-        'Hands-on Exercises Part 2: Loops and conditional statements practice.',
+        'Introduction: Overview of Python and its applications.',
+        'Basic Data Types: Numbers, strings, and variables.',
+        'Functions: Defining and using functions in Python.',
+        'Control Flow: If-else statements, loops, and logical operators.',
+        'Data Structures: Lists, tuples, dictionaries, and sets.',
+        'OOPS: Object-Oriented Programming concepts in Python.',
+        'Project: Build a mini Python application to apply the concepts learned.',
+        'Hands-on Exercises: Practical coding tasks for each topic.',
         'Q&A & Peer Collaboration: Address questions, troubleshoot, and collaborate.',
         'Wrap-Up & Feedback: Recap, gather feedback, and share resources.',
       ],
@@ -204,8 +222,10 @@ export default function Home() {
         'Option for continued learning via a follow-up Q&A and networking.',
       ],
     },
+    registrationLink:
+      'https://docs.google.com/forms/d/e/1FAIpQLSc4BDru-xszxHeXYUPrHUgoFd8kAOhNRTo4g46D04yLR_BTew/viewform',
     poster:
-      'https://res.cloudinary.com/debt9pcvr/image/upload/v1731569975/Snapinsta.app_432305420_1296910395044806_2298325038140788545_n_1080_hzve7t.jpg',
+      'https://res.cloudinary.com/debt9pcvr/image/upload/v1744142016/WhatsApp_Image_2025-04-09_at_01.05.32_8b9035dc_d9nk43.jpg',
   };
 
   return (
@@ -344,6 +364,10 @@ export default function Home() {
               <p className="mb-3 font-normal">
                 {nextEvent.details.description}
               </p>
+              <p className="mb-3 font-normal">
+                <strong>Date : </strong>
+                {nextEvent.details.date}
+              </p>
               <div className="flex justify-start gap-4">
                 <button
                   className="text-sm px-4 py-2 bg-white/5 rounded-lg cursor-pointer hover:bg-white/10 transition-colors"
@@ -353,7 +377,9 @@ export default function Home() {
                 </button>
                 <button
                   className="text-sm  px-4 py-2  rounded-lg cursor-pointer bg-blue-500 hover:bg-blue-600 transition-colors"
-                  onClick={() => navigate(`/events/${nextEvent.ref}`)}
+                  onClick={() => {
+                    window.open(nextEvent.registrationLink, '_blank');
+                  }}
                 >
                   Register
                 </button>

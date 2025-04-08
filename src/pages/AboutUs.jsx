@@ -173,20 +173,18 @@ function AboutUs() {
 
             {/* Teacher founder */}
             <h2 className="text-xl font-bold mb-6">Teacher Founder:</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-6">
-              <div className="flex items-center justify-center h-full">
-                <div className="size-36 md:size-52 mx-auto rounded-full bg-white/10 mb-4">
-                  <img
-                    src="https://res.cloudinary.com/debt9pcvr/image/upload/v1741946619/Prasanjit_Maji_jsem8c.jpg"
-                    alt="Teacher Founder"
-                    loading="lazy"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
+            <div className="flex items-center justify-center h-full">
+              <div className="size-36 md:size-52 mx-auto rounded-full bg-white/10 mb-4">
+                <img
+                  src="https://res.cloudinary.com/debt9pcvr/image/upload/v1741946619/Prasanjit_Maji_jsem8c.jpg"
+                  alt="Teacher Founder"
+                  loading="lazy"
+                  className="w-full h-full object-cover rounded-full"
+                />
+                <h3 className="font-semibold text-xl md:text-3xl flex items-center justify-center md:justify-start mt-4">
+                  Prasanjit Maji
+                </h3>
               </div>
-              <h3 className="font-semibold text-xl md:text-3xl flex items-center justify-center md:justify-start">
-                Prasanjit Maji
-              </h3>
             </div>
 
             {/* Student founders */}
