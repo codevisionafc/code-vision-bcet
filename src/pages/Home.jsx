@@ -201,8 +201,8 @@ export default function Home() {
       targetAudience: 'First and second year students',
       objective: 'Introduce Python programming basics through hands-on coding.',
       description:
-        'Join us for the Python Bootcamp, a 5-day event designed for first and second-year students to introduce Python programming basics through hands-on coding. The bootcamp includes key Python topics, practical exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
-      duration: '5 days',
+        'Join us for the Python Bootcamp, a 3-day event designed for first and second-year students to introduce Python programming basics through hands-on coding. The bootcamp includes key Python topics, practical exercises, Q&A sessions, and peer collaboration. Additional support and resources will be provided.',
+      duration: '3 days',
       date: '12 - 14 August 2025',
       agenda: [
         'Introduction: Overview of Python and its applications.',
