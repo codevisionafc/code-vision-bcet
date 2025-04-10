@@ -185,7 +185,7 @@ export default function Home() {
     'CODE VISION is a dynamic coding club dedicated to fostering technical excellence and leadership skills among students. We believe in learning by doing and creating opportunities for growth.';
 
   const orientation =
-    'Welcome to CODE VISION! Our orientation program is designed to introduce you to the club, its members, and the various activitieswe offer. Join us to learn more about our mission, vision, and upcoming events.';
+    'Welcome to CODE VISION! Our orientation program is designed to introduce you to the club, its members, and the various activities we offer. Join us to learn more about our mission, vision, and upcoming events.';
   const membersPhotos = [
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731427424/IMG-20241111-WA0058_g35v0i.jpg',
     'https://res.cloudinary.com/debt9pcvr/image/upload/v1731425180/IMG-20241111-WA0016_b8iobd.jpg',

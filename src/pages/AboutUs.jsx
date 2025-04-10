@@ -28,6 +28,7 @@ Join us at Code Vision as we explore the limitless possibilities of coding toget
     secondYear: 'Coordinators',
   },
   events: [
+    'Python Workshop (for 1st and 2nd Year)',
     'C-Workshop (for 1st Year)',
     'Console (Annual Event)',
     'CodeJam (Hackathon)',
